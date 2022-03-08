@@ -6,7 +6,18 @@
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+    <Viewbox Stretch="Uniform" SnapsToDevicePixels="True">
+        <Grid Height="100" Width="184">
+            <TextBox x:Name="inputX" HorizontalAlignment="Left" Margin="43,11,0,0" TextWrapping="Wrap" Text="Getal X" VerticalAlignment="Top" Width="40" Height="13" FontSize="8" FontFamily="Arial" TextAlignment="Center"/>
+            <Button x:Name="additon" Content="X+Y" HorizontalAlignment="Left" Margin="63,0,0,0" VerticalAlignment="Center" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="add"/>
+            <Button x:Name="subtraction" Content="X-Y" HorizontalAlignment="Left" Margin="97,0,0,0" VerticalAlignment="Center" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="subtract"/>
+            <Button x:Name="multiplication" Content="X*Y" HorizontalAlignment="Left" Margin="63,61,0,0" VerticalAlignment="Top" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="multiply"/>
+            <Button x:Name="division" Content="X/Y" HorizontalAlignment="Left" Margin="97,61,0,0" VerticalAlignment="Top" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="divide"/>
+            <Button x:Name="rooting" Content="√X" HorizontalAlignment="Left" Margin="63,78,0,0" VerticalAlignment="Top" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="root"/>
+            <Button x:Name="exponentiation" Content="X^Y" HorizontalAlignment="Left" Margin="97,78,0,0" VerticalAlignment="Top" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="expone"/>
+            <TextBlock x:Name="result_Label" HorizontalAlignment="Center" Margin="0,26,0,0" TextWrapping="Wrap" Text="Resultaat:" VerticalAlignment="Top" FontFamily="Arial" FontSize="4"/>
+            <TextBox x:Name="inputY" HorizontalAlignment="Left" Margin="97,11,0,0" TextWrapping="Wrap" Text="Getal Y" VerticalAlignment="Top" Width="40" Height="13" FontSize="8" FontFamily="Arial" TextAlignment="Center" TextChanged="TextBox_TextChanged"/>
+            <TextBlock x:Name="result" HorizontalAlignment="Center" Margin="0,31,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Height="13" Width="136" FontSize="8" FontFamily="Arial" TextAlignment="Center"/>
+        </Grid>
+    </Viewbox>
 </Window>
