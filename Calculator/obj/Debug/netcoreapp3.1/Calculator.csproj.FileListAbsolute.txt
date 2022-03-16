@@ -18,3 +18,4 @@ C:\Users\Quinten\Documents\Studie\C# Advanced\Weekopdrachten\Weekopdracht 2\Calc
 C:\Users\Quinten\Documents\Studie\C# Advanced\Weekopdrachten\Weekopdracht 2\Calculator\Calculator\obj\Debug\netcoreapp3.1\Calculator.dll
 C:\Users\Quinten\Documents\Studie\C# Advanced\Weekopdrachten\Weekopdracht 2\Calculator\Calculator\obj\Debug\netcoreapp3.1\Calculator.pdb
 C:\Users\Quinten\Documents\Studie\C# Advanced\Weekopdrachten\Weekopdracht 2\Calculator\Calculator\obj\Debug\netcoreapp3.1\Calculator.genruntimeconfig.cache
+C:\Users\Quinten\Documents\Studie\C# Advanced\Weekopdrachten\Weekopdracht 2\Calculator\Calculator\obj\Debug\netcoreapp3.1\App.baml

@@ -6,4 +6,44 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Cloud.svg" />
+    <None Remove="Fonts\SFPRODISPLAYBLACKITALIC.ttf" />
+    <None Remove="Fonts\SFPRODISPLAYBOLD.ttf" />
+    <None Remove="Fonts\SFPRODISPLAYHEAVYITALIC.ttf" />
+    <None Remove="Fonts\SFPRODISPLAYLIGHTITALIC.ttf" />
+    <None Remove="Fonts\SFPRODISPLAYMEDIUM.ttf" />
+    <None Remove="Fonts\SFPRODISPLAYREGULAR.ttf" />
+    <None Remove="Imgs\Cloud.png" />
+    <None Remove="Imgs\Icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Cloud.svg" />
+    <Resource Include="Fonts\SFPRODISPLAYBLACKITALIC.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\SFPRODISPLAYBOLD.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\SFPRODISPLAYHEAVYITALIC.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\SFPRODISPLAYLIGHTITALIC.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\SFPRODISPLAYMEDIUM.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\SFPRODISPLAYREGULAR.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Imgs\Cloud.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Imgs\Icon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
 </Project>

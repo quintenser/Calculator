@@ -36,6 +36,7 @@ namespace Calculator
                 string msg = "X is geen getal.";
                 string title = "Verkeerde invoer";
                 MessageBox.Show(msg, title);
+                return;
             }
 
             try { Y = Int32.Parse(inputY.Text); }
@@ -44,11 +45,26 @@ namespace Calculator
                 string msg = "Y is geen getal.";
                 string title = "Verkeerde invoer";
                 MessageBox.Show(msg, title);
+                return;
             }
         }
-        private void parseResult(object sender, RoutedEventArgs e)
+        private void ShowResult(object sender, RoutedEventArgs e)
         {
-            result.Text = Convert.ToString(calculatedResult);
+            try {if (calculatedResult < 0)
+                {
+                    throw new NegativeResultException("");
+                }
+                result_Copy.Text = Convert.ToString(calculatedResult);
+                result.Text = Convert.ToString(calculatedResult);
+            }
+
+            catch (NegativeResultException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+           
+            
         }
         private void NumY_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -79,33 +95,33 @@ namespace Calculator
         {
             parseInput(sender, e);
             calculatedResult = X + Y;
-            parseResult(sender, e);
+            ShowResult(sender, e);
         }
 
         private void subtract(object sender, RoutedEventArgs e)
         {
             parseInput(sender, e);
             calculatedResult = X - Y;
-            parseResult(sender, e);
+            ShowResult(sender, e);
         }
         private void multiply(object sender, RoutedEventArgs e)
         {
             parseInput(sender, e);
             calculatedResult = X * Y;
-            parseResult(sender, e);
+            ShowResult(sender, e);
         }
         private void divide(object sender, RoutedEventArgs e)
         {
             parseInput(sender, e);
             calculatedResult = X / Y;
-            parseResult(sender, e);
+            ShowResult(sender, e);
         }
         private void root(object sender, RoutedEventArgs e)
         {
             parseInput(sender, e);
             var doubleX = Convert.ToDouble(X);
             calculatedResult = (int)Math.Sqrt(doubleX);
-            parseResult(sender, e);
+            ShowResult(sender, e);
         }
         private void expone(object sender, RoutedEventArgs e)
         {
@@ -113,7 +129,7 @@ namespace Calculator
             var exponeX = Convert.ToDouble(X);
             var exponeY = Convert.ToDouble(Y);
             calculatedResult = (int)Math.Pow(exponeX, exponeY);
-            parseResult (sender, e);
+            ShowResult (sender, e);
         }
     }
 }

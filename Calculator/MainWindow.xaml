@@ -5,19 +5,281 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Calculator" Height="450" Width="800"
+        Icon="/Imgs/Icon.png">
+    
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" />
+        <SolidColorBrush x:Key="Button.Static.Border" />
+        <SolidColorBrush x:Key="Button.MouseOver.Background" />
+        <SolidColorBrush x:Key="Button.MouseOver.Border" />
+        <SolidColorBrush x:Key="Button.Pressed.Background" />
+        <SolidColorBrush x:Key="Button.Pressed.Border" />
+        <SolidColorBrush x:Key="Button.Disabled.Background" />
+        <SolidColorBrush x:Key="Button.Disabled.Border"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="Operation" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" />
+        <SolidColorBrush x:Key="TextBox.Focus.Border" />
+        <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextWrapping" Value="NoWrap"/>
+            <Setter Property="TextTrimming" Value="None"/>
+
+        </Style>
+    </Window.Resources>
     <Viewbox Stretch="Uniform" SnapsToDevicePixels="True">
         <Grid Height="100" Width="184">
-            <TextBox x:Name="inputX" HorizontalAlignment="Left" Margin="43,11,0,0" TextWrapping="Wrap" Text="Getal X" VerticalAlignment="Top" Width="40" Height="13" FontSize="8" FontFamily="Arial" TextAlignment="Center"/>
-            <Button x:Name="additon" Content="X+Y" HorizontalAlignment="Left" Margin="63,0,0,0" VerticalAlignment="Center" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="add"/>
-            <Button x:Name="subtraction" Content="X-Y" HorizontalAlignment="Left" Margin="97,0,0,0" VerticalAlignment="Center" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="subtract"/>
-            <Button x:Name="multiplication" Content="X*Y" HorizontalAlignment="Left" Margin="63,61,0,0" VerticalAlignment="Top" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="multiply"/>
-            <Button x:Name="division" Content="X/Y" HorizontalAlignment="Left" Margin="97,61,0,0" VerticalAlignment="Top" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="divide"/>
-            <Button x:Name="rooting" Content="√X" HorizontalAlignment="Left" Margin="63,78,0,0" VerticalAlignment="Top" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="root"/>
-            <Button x:Name="exponentiation" Content="X^Y" HorizontalAlignment="Left" Margin="97,78,0,0" VerticalAlignment="Top" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="expone"/>
-            <TextBlock x:Name="result_Label" HorizontalAlignment="Center" Margin="0,26,0,0" TextWrapping="Wrap" Text="Resultaat:" VerticalAlignment="Top" FontFamily="Arial" FontSize="4"/>
-            <TextBox x:Name="inputY" HorizontalAlignment="Left" Margin="97,11,0,0" TextWrapping="Wrap" Text="Getal Y" VerticalAlignment="Top" Width="40" Height="13" FontSize="8" FontFamily="Arial" TextAlignment="Center" TextChanged="TextBox_TextChanged"/>
-            <TextBlock x:Name="result" HorizontalAlignment="Center" Margin="0,31,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Height="13" Width="136" FontSize="8" FontFamily="Arial" TextAlignment="Center"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="16*"/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+            <Image Margin="95,4,45,36" Source="/Imgs/Cloud.png" Stretch="Fill"/>
+            <Image Margin="45,4,95,36" Source="/Imgs/Cloud.png" Stretch="Fill"/>
+            <Rectangle HorizontalAlignment="Center" Height="88" Margin="0,5,0,0" VerticalAlignment="Top" Width="94" RadiusX="12.5" RadiusY="12.5" Grid.RowSpan="2">
+                <Rectangle.Stroke>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFF7084A"/>
+                        <GradientStop Color="#FFF3800B" Offset="0.2"/>
+                        <GradientStop Color="#FFF9F24B" Offset="0.4"/>
+                        <GradientStop Color="#FF57CC6E" Offset="0.6"/>
+                        <GradientStop Color="#FF6A0980" Offset="1"/>
+                        <GradientStop Color="#FF3978B2" Offset="0.8"/>
+                    </LinearGradientBrush>
+                </Rectangle.Stroke>
+                <Rectangle.Effect>
+                    <DropShadowEffect/>
+                </Rectangle.Effect>
+            </Rectangle>
+            <Image Margin="74,22,74,20" Source="/Imgs/Cloud.png" Stretch="Fill"/>
+            <TextBox Style="{DynamicResource TextBoxStyle}" x:Name="inputX" HorizontalAlignment="Left" Margin="47,9,0,0" TextWrapping="Wrap" Text="Getal X" VerticalAlignment="Top" Width="40" Height="13" FontSize="8" FontFamily="SF Pro Display" TextAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" SelectionBrush="#FFF6A3FF">
+                <TextBox.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                                <RotateTransform Angle="127.569" CenterX="0.5" CenterY="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FF0F71DE"/>
+                        <GradientStop Color="#FF04FFCB" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBox.Foreground>
+            </TextBox>
+            <Button Style="{DynamicResource Operation}" x:Name="additon" Content="X+Y" HorizontalAlignment="Left" Margin="63,41,0,0" VerticalAlignment="Top" Height="12" Width="20" FontFamily="SF Pro Display" FontSize="6" Click="add" FontWeight="Normal" FontStyle="Normal" FontStretch="Normal" BorderBrush="{x:Null}">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <Button.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFB9652A" Offset="1"/>
+                        <GradientStop Color="Red" Offset="0"/>
+                    </LinearGradientBrush>
+                </Button.Foreground>
+            </Button>
+            <Button x:Name="subtraction" Content="X-Y" HorizontalAlignment="Left" Margin="97,41,0,0" VerticalAlignment="Top" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="subtract" Style="{DynamicResource Operation}">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <Button.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFE2BE93" Offset="1"/>
+                        <GradientStop Color="#FFFF5D00" Offset="0"/>
+                    </LinearGradientBrush>
+                </Button.Foreground>
+            </Button>
+            <Button x:Name="multiplication" Content="X*Y" HorizontalAlignment="Left" Margin="63,58,0,0" VerticalAlignment="Top" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="multiply" Style="{DynamicResource Operation}" Grid.RowSpan="2">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <Button.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                                <RotateTransform Angle="0" CenterX="0.5" CenterY="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FF2087B7"/>
+                        <GradientStop Color="#FFF6FD72" Offset="1"/>
+                        <GradientStop Color="#FFFFDF47" Offset="0"/>
+                    </LinearGradientBrush>
+                </Button.Foreground>
+            </Button>
+            <Button x:Name="division" Content="X/Y" HorizontalAlignment="Left" Margin="97,58,0,0" VerticalAlignment="Top" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="divide" Style="{DynamicResource Operation}" Grid.RowSpan="2">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <Button.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                                <RotateTransform Angle="0" CenterX="0.5" CenterY="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FF96D889"/>
+                        <GradientStop Color="#FF7BFF4C" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Foreground>
+            </Button>
+            <Button x:Name="rooting" Content="√X" HorizontalAlignment="Left" Margin="63,0,0,0" VerticalAlignment="Center" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="root" Style="{DynamicResource Operation}" Grid.Row="1">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <Button.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF00E2FF"/>
+                        <GradientStop Color="#FF002FEC" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Foreground>
+            </Button>
+            <Button x:Name="exponentiation" Content="X^Y" HorizontalAlignment="Left" Margin="97,0,0,0" VerticalAlignment="Center" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="expone" Style="{DynamicResource Operation}" Grid.Row="1">
+                <Button.Effect>
+                    <DropShadowEffect/>
+                </Button.Effect>
+                <Button.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFC245FF"/>
+                        <GradientStop Color="#FF002FEC" Offset="1"/>
+                    </LinearGradientBrush>
+                </Button.Foreground>
+            </Button>
+            <TextBox x:Name="inputY" HorizontalAlignment="Left" Margin="97,9,0,0" TextWrapping="Wrap" Text="Getal Y" VerticalAlignment="Top" Width="40" Height="13" FontSize="8" FontFamily="SF Pro Display" TextAlignment="Center" TextChanged="TextBox_TextChanged" BorderBrush="{x:Null}" SelectionBrush="#FFF6A3FF" Background="{x:Null}" Style="{DynamicResource TextBoxStyle}">
+                <TextBox.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush.RelativeTransform>
+                            <TransformGroup>
+                                <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                                <RotateTransform Angle="321.34000000000003" CenterX="0.5" CenterY="0.5"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </LinearGradientBrush.RelativeTransform>
+                        <GradientStop Color="#FFD88915"/>
+                        <GradientStop Color="#FFFF2828" Offset="1"/>
+                    </LinearGradientBrush>
+                </TextBox.Foreground>
+            </TextBox>
+            <TextBlock x:Name="result_Copy" HorizontalAlignment="Center" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Height="12" Width="90" FontSize="10" FontFamily="SF Pro Display" TextAlignment="Center" FontWeight="Bold">
+                <TextBlock.Effect>
+                    <BlurEffect/>
+                </TextBlock.Effect>
+                <TextBlock.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFF31616" Offset="0.099"/>
+                        <GradientStop Color="#FF8709B9" Offset="0.89"/>
+                        <GradientStop Color="#FFF97607" Offset="0.253"/>
+                        <GradientStop Color="#FFFFE432" Offset="0.414"/>
+                        <GradientStop Color="#FE93FF76" Offset="0.586"/>
+                        <GradientStop Color="#FE0D25AB" Offset="0.716"/>
+                    </LinearGradientBrush>
+                </TextBlock.Foreground>
+            </TextBlock>
+            <TextBlock x:Name="result" HorizontalAlignment="Center" TextWrapping="Wrap" Text="0" VerticalAlignment="Center" Height="12" Width="90" FontSize="10" FontFamily="SF Pro Display" TextAlignment="Center" FontWeight="Bold">
+                <TextBlock.Foreground>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFF31616" Offset="0.099"/>
+                        <GradientStop Color="#FF8709B9" Offset="0.89"/>
+                        <GradientStop Color="#FFF97607" Offset="0.253"/>
+                        <GradientStop Color="#FFFFE432" Offset="0.414"/>
+                        <GradientStop Color="#FE93FF76" Offset="0.586"/>
+                        <GradientStop Color="#FE0D25AB" Offset="0.716"/>
+                    </LinearGradientBrush>
+                </TextBlock.Foreground>
+            </TextBlock>
         </Grid>
     </Viewbox>
 </Window>

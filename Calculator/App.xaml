@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:Calculator"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <FontFamily x:Key="SFPRODISPLAY">pack://application:,,,/Fonts#SFPRODISPLAY</FontFamily>
     </Application.Resources>
 </Application>
