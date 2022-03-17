@@ -54,6 +54,7 @@ namespace Calculator
                 {
                     throw new NegativeResultException("");
                 }
+                
                 result_Copy.Text = Convert.ToString(calculatedResult);
                 result.Text = Convert.ToString(calculatedResult);
             }
@@ -113,7 +114,14 @@ namespace Calculator
         private void divide(object sender, RoutedEventArgs e)
         {
             parseInput(sender, e);
-            calculatedResult = X / Y;
+            try { calculatedResult = X / Y; }
+            catch {
+                string msg = "Het is niet mogelijk om een getal te delen door 0.";
+                string title = "Math Error";
+                MessageBox.Show(msg, title);
+                return;
+            }
+            
             ShowResult(sender, e);
         }
         private void root(object sender, RoutedEventArgs e)

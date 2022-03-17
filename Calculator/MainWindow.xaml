@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Calculator" Height="450" Width="800"
         Icon="/Imgs/Icon.png">
-    
+
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -122,7 +122,7 @@
             </Grid.RowDefinitions>
             <Image Margin="95,4,45,36" Source="/Imgs/Cloud.png" Stretch="Fill"/>
             <Image Margin="45,4,95,36" Source="/Imgs/Cloud.png" Stretch="Fill"/>
-            <Rectangle HorizontalAlignment="Center" Height="88" Margin="0,5,0,0" VerticalAlignment="Top" Width="94" RadiusX="12.5" RadiusY="12.5" Grid.RowSpan="2">
+            <Rectangle HorizontalAlignment="Center" Height="88" Margin="0,5,0,0" VerticalAlignment="Top" Width="90" RadiusX="9" RadiusY="9" Grid.RowSpan="2">
                 <Rectangle.Stroke>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FFF7084A"/>
@@ -137,7 +137,11 @@
                     <DropShadowEffect/>
                 </Rectangle.Effect>
             </Rectangle>
-            <Image Margin="74,22,74,20" Source="/Imgs/Cloud.png" Stretch="Fill"/>
+            <Image Margin="74,22,74,20" Source="/Imgs/Cloud.png" Stretch="Fill">
+                <Image.Effect>
+                    <DropShadowEffect Opacity="0.25" Direction="275" ShadowDepth="2" RenderingBias="Quality"/>
+                </Image.Effect>
+            </Image>
             <TextBox Style="{DynamicResource TextBoxStyle}" x:Name="inputX" HorizontalAlignment="Left" Margin="47,9,0,0" TextWrapping="Wrap" Text="Getal X" VerticalAlignment="Top" Width="40" Height="13" FontSize="8" FontFamily="SF Pro Display" TextAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" SelectionBrush="#FFF6A3FF">
                 <TextBox.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -156,7 +160,7 @@
             </TextBox>
             <Button Style="{DynamicResource Operation}" x:Name="additon" Content="X+Y" HorizontalAlignment="Left" Margin="63,41,0,0" VerticalAlignment="Top" Height="12" Width="20" FontFamily="SF Pro Display" FontSize="6" Click="add" FontWeight="Normal" FontStyle="Normal" FontStretch="Normal" BorderBrush="{x:Null}">
                 <Button.Effect>
-                    <DropShadowEffect/>
+                    <DropShadowEffect RenderingBias="Quality" Direction="275" ShadowDepth="2"/>
                 </Button.Effect>
                 <Button.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -167,7 +171,7 @@
             </Button>
             <Button x:Name="subtraction" Content="X-Y" HorizontalAlignment="Left" Margin="97,41,0,0" VerticalAlignment="Top" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="subtract" Style="{DynamicResource Operation}">
                 <Button.Effect>
-                    <DropShadowEffect/>
+                    <DropShadowEffect ShadowDepth="2" Direction="275" RenderingBias="Quality"/>
                 </Button.Effect>
                 <Button.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -178,7 +182,7 @@
             </Button>
             <Button x:Name="multiplication" Content="X*Y" HorizontalAlignment="Left" Margin="63,58,0,0" VerticalAlignment="Top" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="multiply" Style="{DynamicResource Operation}" Grid.RowSpan="2">
                 <Button.Effect>
-                    <DropShadowEffect/>
+                    <DropShadowEffect ShadowDepth="2" Direction="275" RenderingBias="Quality"/>
                 </Button.Effect>
                 <Button.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -198,7 +202,7 @@
             </Button>
             <Button x:Name="division" Content="X/Y" HorizontalAlignment="Left" Margin="97,58,0,0" VerticalAlignment="Top" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="divide" Style="{DynamicResource Operation}" Grid.RowSpan="2">
                 <Button.Effect>
-                    <DropShadowEffect/>
+                    <DropShadowEffect Direction="275" RenderingBias="Quality" ShadowDepth="2"/>
                 </Button.Effect>
                 <Button.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -217,7 +221,7 @@
             </Button>
             <Button x:Name="rooting" Content="√X" HorizontalAlignment="Left" Margin="63,0,0,0" VerticalAlignment="Center" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="root" Style="{DynamicResource Operation}" Grid.Row="1">
                 <Button.Effect>
-                    <DropShadowEffect/>
+                    <DropShadowEffect ShadowDepth="2" Direction="275"/>
                 </Button.Effect>
                 <Button.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -228,7 +232,7 @@
             </Button>
             <Button x:Name="exponentiation" Content="X^Y" HorizontalAlignment="Left" Margin="97,0,0,0" VerticalAlignment="Center" Height="12" Width="20" FontFamily="Arial" FontSize="6" Click="expone" Style="{DynamicResource Operation}" Grid.Row="1">
                 <Button.Effect>
-                    <DropShadowEffect/>
+                    <DropShadowEffect RenderingBias="Quality" Direction="275" ShadowDepth="2"/>
                 </Button.Effect>
                 <Button.Foreground>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
